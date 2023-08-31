@@ -17,9 +17,39 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <header></header>
-    <main></main>
+  <body class="mx-auto container py-3">
+    <header>
+      <div class="navbar bg-base-100">
+        <div class="navbar-start">
+          <figure><img src="./images/Logo.png" alt="" /></figure>
+        </div>
+        <div class="navbar-center">
+          <a class="bg-[#25252533] font-semibold btn-sm normal-case text-xl"
+            >Sort by view</a
+          >
+        </div>
+        <div class="navbar-end">
+          <button class="btn-sm bg-[#25252533] active:bg-red-400 font-semibold">
+            BLOG
+          </button>
+        </div>
+      </div>
+      <hr />
+    </header>
+    <main>
+      <div
+        id="categories"
+        class="mx-auto flex items-center flex-wrap justify-center gap-5 py-8"
+      ></div>
+      <div
+        id="categories"
+        class="mx-auto flex items-center flex-wrap justify-center gap-5 py-8"
+      ></div>
+      <div
+        id="video-container"
+        class="mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-5 py-8"
+      ></div>
+    </main>
     <footer></footer>
     <script src="./code.js"></script>
   </body>
