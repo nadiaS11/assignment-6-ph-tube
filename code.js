@@ -22,11 +22,36 @@ const handleCategory = async (categoryId) => {
   );
   const data = await response.json();
   const categoryVideo = data.data;
+  console.log(categoryVideo);
   const videoContainer = document.getElementById("video-container");
-  categoryVideo.forEach((video) => {
-    const videoCard = document.createElement("div");
-    videoCard.classList = `flex flex-col mx-auto`;
-    videoCard.innerHTML = `
+  videoContainer.innerHTML = "";
+  if (categoryVideo.length === 0) {
+    videoContainer.classList.remove(
+      "grid",
+      "md:grid-cols-2",
+      "lg:grid-cols-4",
+      "gap-10",
+      "lg:gap-8"
+    );
+    videoContainer.innerHTML = `
+      <div class="mx-auto text-center flex flex-col items-center justify-center mt-12">
+        <img src="./images/Icon.png" alt="">
+        <h2 class="font-bold text-4xl">Oops!! Sorry, </br>There is no content here</h2>
+      </div>
+      `;
+  } else {
+    videoContainer.classList.add(
+      "grid",
+      "md:grid-cols-2",
+      "lg:grid-cols-4",
+      "gap-10",
+      "lg:gap-8"
+    );
+    categoryVideo.forEach((video) => {
+      const videoCard = document.createElement("div");
+      videoCard.classList = `flex flex-col mx-auto`;
+
+      videoCard.innerHTML = `
     <figure>
             <img class="h-[220px] w-80 rounded-lg" src=${video.thumbnail} />
           </figure>
@@ -45,9 +70,11 @@ const handleCategory = async (categoryId) => {
             </div>
           </div>
     `;
-    videoContainer.appendChild(videoCard);
-    console.log(video?.authors[0]?.profile_name || " ");
-  });
+
+      videoContainer.appendChild(videoCard);
+      // console.log(categoryVideo);
+    });
+  }
 };
 handleCategory(1000);
 loadCategory();

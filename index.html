@@ -18,17 +18,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="mx-auto container py-3">
-    <header>
-      <div class="navbar bg-base-100">
-        <div class="navbar-start">
+    <header class="px-4">
+      <div
+        class="my-8 flex flex-wrap justify-center md:justify-between items-center gap-4 bg-base-100"
+      >
+        <div class="">
           <figure><img src="./images/Logo.png" alt="" /></figure>
         </div>
-        <div class="navbar-center">
-          <a class="bg-[#25252533] font-semibold btn-sm normal-case text-xl"
-            >Sort by view</a
+        <div class="">
+          <button
+            class="bg-[#25252533] font-semibold btn-sm normal-case text-xl"
           >
+            Sort by view
+          </button>
         </div>
-        <div class="navbar-end">
+        <div class="">
           <button class="btn-sm bg-[#25252533] active:bg-red-400 font-semibold">
             BLOG
           </button>
@@ -41,13 +45,10 @@
         id="categories"
         class="mx-auto flex items-center flex-wrap justify-center gap-5 py-8"
       ></div>
-      <div
-        id="categories"
-        class="mx-auto flex items-center flex-wrap justify-center gap-5 py-8"
-      ></div>
+
       <div
         id="video-container"
-        class="mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-5 py-8"
+        class="mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 py-8 px-2"
       ></div>
     </main>
     <footer></footer>
