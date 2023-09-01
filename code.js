@@ -1,3 +1,5 @@
+let selectedId = null;
+
 const loadCategory = async () => {
   const response = await fetch(
     "https://openapi.programming-hero.com/api/videos/categories"
@@ -21,11 +23,13 @@ const loadCategory = async () => {
 
 //////////////////////handles categories
 const handleCategory = async (categoryId, sortByViews = false) => {
+  selectedId = categoryId;
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
   const data = await response.json();
   const categoryVideo = data.data;
+
   // console.log(categoryVideo);
   const videoContainer = document.getElementById("video-container");
   videoContainer.innerHTML = "";
@@ -108,7 +112,11 @@ const handleCategory = async (categoryId, sortByViews = false) => {
 
 //for sorting
 document.getElementById("btn-sort").addEventListener("click", () => {
-  handleCategory(1000, true);
+  if (selectedId) {
+    handleCategory(selectedId, true);
+  } else {
+    handleCategory(1000, true);
+  }
 });
 
 const handleSeconds = (d) => {
