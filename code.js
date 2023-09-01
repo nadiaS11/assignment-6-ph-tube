@@ -125,7 +125,7 @@ const handleSeconds = (d) => {
   let remainingSeconds = d % 3600;
   const minutes = parseInt(remainingSeconds / 60);
 
-  return `${hours}hrs ${minutes}mins ago`;
+  return `${hours}hrs ${minutes}min ago`;
 };
 
 handleCategory(1000);
