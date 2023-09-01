@@ -22,7 +22,7 @@ const handleCategory = async (categoryId) => {
   );
   const data = await response.json();
   const categoryVideo = data.data;
-  console.log(categoryVideo);
+  // console.log(categoryVideo);
   const videoContainer = document.getElementById("video-container");
   videoContainer.innerHTML = "";
   if (categoryVideo.length === 0) {
@@ -49,12 +49,18 @@ const handleCategory = async (categoryId) => {
     );
     categoryVideo.forEach((video) => {
       const videoCard = document.createElement("div");
-      videoCard.classList = `flex flex-col mx-auto`;
+      videoCard.classList = `flex flex-col mx-auto relative`;
+      // console.log(video);
+      const seconds = video?.others?.posted_date;
+      const convertedSeconds = handleSeconds(seconds);
 
       videoCard.innerHTML = `
-    <figure>
-            <img class="h-[220px] w-80 rounded-lg" src=${video.thumbnail} />
-          </figure>
+    
+            <img class="h-[200px] w-80 object-cover rounded-lg" src=${
+              video.thumbnail
+            } />
+            <div class="absolute text-white bg-gray-900 px-2 rounded-lg right-2  top-28">${convertedSeconds}</div>
+          
           <div class="flex items-start gap-5 pt-5 px-2">
             
               <img class=" w-10 h-10 rounded-full" src=${
@@ -62,10 +68,13 @@ const handleCategory = async (categoryId) => {
               }/>
             
             <div class="">
-              <h2 class="text-xl font-bold">Shoes!</h2>
-              <p class="py-2 font-semibold text-gray-500 text-sm">${
+              <h2 class="text-xl font-bold">${video.title} </h2>
+              <p class="py-2 flex items-center font-semibold text-gray-500 text-sm">${
                 video?.authors[0]?.profile_name || " "
-              }</p>
+              } <span class="ml-3">${
+        video?.authors[0]?.verified ? '<img src="./images/verified.svg">' : " "
+      } </span>  
+      </p>
               <p class="text-gray-500 font-semibold text-sm">91k Views</p>
             </div>
           </div>
@@ -78,3 +87,21 @@ const handleCategory = async (categoryId) => {
 };
 handleCategory(1000);
 loadCategory();
+
+const handleSeconds = (d) => {
+  d = Number(d);
+  const hours = parseInt(d / 3600);
+  let remainingSeconds = d % 3600;
+  const minutes = parseInt(remainingSeconds / 60);
+  console.log(`${hours}h ${minutes}m ago`);
+  return `${hours}h ${minutes}m ago`;
+};
+// sortButton.addEventListener("click", () => {
+//   sortedVideo = categoryVideo.sort((a, b) => {
+//     const view1 = parseFloat(a.others.views);
+//     const view2 = parseFloat(b.others.views);
+//     if (view1 > view2) return -1;
+//     else if (view1 < view2) return 1;
+//     else return 0;
+//   });
+// });
