@@ -5,21 +5,22 @@ const loadCategory = async () => {
   const data = await response.json();
   const categoryArr = data.data;
   const categories = document.getElementById("categories");
+  categories.innerHTML = "";
   categoryArr.forEach((btn) => {
     const div = document.createElement("div");
 
     div.innerHTML = `
-    <a onclick="handleCategory('${btn.category_id}')" id="${btn.category_id}" class="btn-sm px-4 py-2 text-lg font-semibold bg-[#25252533] active:bg-red-600 active:text-white rounded-sm">
+    <a onclick="handleCategory('${btn.category_id}')" id="${btn.category_id}" class=" btn-sm px-4 py-2 text-lg font-semibold bg-[#25252533] active:bg-red-600 active:text-white rounded-sm">
           ${btn.category}
         </a>
     `;
     categories.appendChild(div);
   });
-  console.log(document.getElementsByTagName("a"));
+  // console.log(document.getElementsByTagName("a"));
 };
 
 //////////////////////handles categories
-const handleCategory = async (categoryId) => {
+const handleCategory = async (categoryId, sortByViews = false) => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
   );
@@ -43,6 +44,15 @@ const handleCategory = async (categoryId) => {
       </div>
       `;
   } else {
+    if (sortByViews) {
+      categoryVideo.sort((a, b) => {
+        const view1 = parseFloat(a.others.views);
+        const view2 = parseFloat(b.others.views);
+        if (view1 > view2) return -1;
+        else if (view1 < view2) return 1;
+        else return 0;
+      });
+    }
     videoContainer.classList.add(
       "grid",
       "md:grid-cols-2",
@@ -93,10 +103,13 @@ const handleCategory = async (categoryId) => {
       // console.log(video?.others?.views || "not available");
     });
   }
+  loadCategory();
 };
 
-handleCategory(1000);
-loadCategory();
+//for sorting
+document.getElementById("btn-sort").addEventListener("click", () => {
+  handleCategory(1000, true);
+});
 
 const handleSeconds = (d) => {
   d = Number(d);
@@ -106,3 +119,5 @@ const handleSeconds = (d) => {
 
   return `${hours}hrs ${minutes}mins ago`;
 };
+
+handleCategory(1000);
