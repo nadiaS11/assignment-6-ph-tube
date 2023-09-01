@@ -21,7 +21,8 @@ const loadCategory = async () => {
   // console.log(document.getElementsByTagName("a"));
 };
 
-//////////////////////handles categories
+///handles categories
+
 const handleCategory = async (categoryId, sortByViews = false) => {
   selectedId = categoryId;
   const response = await fetch(
