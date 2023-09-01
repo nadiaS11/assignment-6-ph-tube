@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHero Tube</title>
+    <!-- font awesome -->
+    <script
+      src="https://kit.fontawesome.com/276201f3ac.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Tailwind and DaisyUI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.3.1/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="mx-auto container py-3">
+    <header class="px-4">
+      <div
+        class="my-8 flex flex-wrap justify-center md:justify-between items-center gap-4 bg-base-100"
+      >
+        <div class="">
+          <figure><img src="./images/Logo.png" alt="" /></figure>
+        </div>
+        <div class="">
+          <button
+            id="handleSort('categoryId, sort')"
+            onclick="handleSort()"
+            id="btn-sort"
+            class="bg-[#25252533] font-semibold btn-sm normal-case text-xl"
+          >
+            Sort by view
+          </button>
+        </div>
+        <div class="">
+          <button class="btn-sm bg-[#25252533] active:bg-red-400 font-semibold">
+            BLOG
+          </button>
+        </div>
+      </div>
+      <hr />
+    </header>
+    <main class="space-y-5">
+      <div class="collapse collapse-plus bg-base-200">
+        <input type="radio" name="my-accordion-3" checked="checked" />
+        <div class="collapse-title text-xl font-medium">
+          Discuss the scope of var, let, and const
+        </div>
+        <div class="collapse-content">
+          <ul class="">
+            <li>
+              <strong>var</strong> is the oldest keyword in JavaScript that is
+              used to declare variables in JavaScript. Depending on where a var
+              is declared, it can have two types of scope. Either
+              <i><b>global or functional scope.</b></i>
+            </li>
+            <li>
+              <strong>let</strong> is another keyword used for declaring
+              variables in JavaScript. let variable only has
+              <i><b>block scope</b></i> which means it can only be accessed
+              within the block it was declared..
+            </li>
+            <li>
+              <strong>const</strong> is Javascript keyword to declare a variable
+              that remains constant which means you can't update the value of a
+              variable when it's declared using const. Like let keyword, const
+              also has <i><b>block scope</b></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="collapse collapse-plus bg-base-200">
+        <input type="radio" name="my-accordion-3" />
+        <div class="collapse-title text-xl font-medium">
+          Tell us the use cases of null and undefined
+        </div>
+        <div class="collapse-content">
+          <ul>
+            Both null and undefined has different meaning when used in different
+            contexts.
+            <li><strong>null </strong>means empty or unknown value.</li>
+            Specially when a variable or object has no value i.e empty. One can
+            use null to to assign empty value if needed so.
+            <li>
+              <strong>undefined</strong> means a missing value or a value that
+              wasn't declared already. if a variable is declared without
+              assigning a value then it gives undefined.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="collapse collapse-plus bg-base-200">
+        <input type="radio" name="my-accordion-3" />
+        <div class="collapse-title text-xl font-medium">
+          What do you mean by REST API?
+        </div>
+        <div class="collapse-content">
+          <p>
+            <strong>Representational State Transfer (REST):</strong>
+               REST API means each
+              request must contain all the necessary information to fullfill it
+              and each response must contain all the necessary information to
+              understand the resourse. A resource can be anything such as a user
+              , a document, an img etc. REST API uses
+              <i><b>GET POST PUT/PAtch DELETE</b></i> to perform operations on
+              the requested resources</strong
+            >
+            R
+          </p>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    
+  </body>
+</html>

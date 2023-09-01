@@ -9,13 +9,16 @@ const loadCategory = async () => {
     const div = document.createElement("div");
 
     div.innerHTML = `
-    <a onclick="handleCategory('${btn.category_id}')" class="btn-sm px-4 py-2 text-lg font-semibold bg-[#25252533] active:bg-red-600 active:text-white rounded-sm">
+    <a onclick="handleCategory('${btn.category_id}')" id="${btn.category_id}" class="btn-sm px-4 py-2 text-lg font-semibold bg-[#25252533] active:bg-red-600 active:text-white rounded-sm">
           ${btn.category}
         </a>
     `;
     categories.appendChild(div);
   });
+  console.log(document.getElementsByTagName("a"));
 };
+
+//////////////////////handles categories
 const handleCategory = async (categoryId) => {
   const response = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${categoryId}`
@@ -50,7 +53,7 @@ const handleCategory = async (categoryId) => {
     categoryVideo.forEach((video) => {
       const videoCard = document.createElement("div");
       videoCard.classList = `flex flex-col mx-auto relative`;
-      // console.log(video);
+
       const seconds = video?.others?.posted_date;
       const convertedSeconds = handleSeconds(seconds);
 
@@ -59,7 +62,11 @@ const handleCategory = async (categoryId) => {
             <img class="h-[200px] w-80 object-cover rounded-lg" src=${
               video.thumbnail
             } />
-            <div class="absolute text-white bg-gray-900 px-2 rounded-lg right-2  top-28">${convertedSeconds}</div>
+            <div class="timeDiv absolute text-white bg-gray-900 px-2 rounded-lg right-2  top-32 ">${
+              video?.others?.posted_date
+                ? convertedSeconds
+                : '<div class="timeDiv hidden"></div>'
+            }</div>
           
           <div class="flex items-start gap-5 pt-5 px-2">
             
@@ -75,16 +82,19 @@ const handleCategory = async (categoryId) => {
         video?.authors[0]?.verified ? '<img src="./images/verified.svg">' : " "
       } </span>  
       </p>
-              <p class="text-gray-500 font-semibold text-sm">91k Views</p>
+              <p class="text-gray-500 font-semibold text-sm">${
+                video?.others?.views || "not available"
+              } Views</p>
             </div>
           </div>
     `;
 
       videoContainer.appendChild(videoCard);
-      // console.log(categoryVideo);
+      // console.log(video?.others?.views || "not available");
     });
   }
 };
+
 handleCategory(1000);
 loadCategory();
 
@@ -93,15 +103,6 @@ const handleSeconds = (d) => {
   const hours = parseInt(d / 3600);
   let remainingSeconds = d % 3600;
   const minutes = parseInt(remainingSeconds / 60);
-  console.log(`${hours}h ${minutes}m ago`);
-  return `${hours}h ${minutes}m ago`;
+
+  return `${hours}hrs ${minutes}mins ago`;
 };
-// sortButton.addEventListener("click", () => {
-//   sortedVideo = categoryVideo.sort((a, b) => {
-//     const view1 = parseFloat(a.others.views);
-//     const view2 = parseFloat(b.others.views);
-//     if (view1 > view2) return -1;
-//     else if (view1 < view2) return 1;
-//     else return 0;
-//   });
-// });
